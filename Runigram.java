@@ -180,13 +180,13 @@ public class Runigram {
 		//// Replace the following statement with your code
 		
 		//get colors from c1
-		double weightC1 = alpha;
-		double weightC2 = 1 - alpha;
-		int newRed = (int)((weightC1 * c1.getRed()) + (weightC2 * c2.getRed()));
-		int newBlue = (int)((weightC1 * c1.getBlue()) + (weightC2 * c2.getBlue()));
-		int newGreen = (int)((weightC1 * c1.getGreen()) + (weightC2 * c2.getGreen()));
-		Color newColor = new Color(newRed ,newGreen, newBlue);
-		return newColor;
+		int red =(int)(alpha * c1.getRed()+ (1-alpha) * c2.getRed());
+		int green =(int)(alpha * c1.getGreen()+ (1-alpha) * c2.getGreen());
+		int blue =(int)(alpha * c1.getBlue()+ (1-alpha) * c2.getBlue());
+
+		Color blenColor = new Color(red,green,blue);
+
+		return blenColor;
 	}
 	
 	/**
@@ -197,14 +197,18 @@ public class Runigram {
 	 */
 	public static Color[][] blend(Color[][] image1, Color[][] image2, double alpha) {
 		//// Replace the following statement with your code
-		Color [][] newImage = new Color[image1.length][image1[0].length];
-		for (int i = 0; i < image1.length; i++) {
-			for (int j = 0; j < image1[0].length; j++) {
-				newImage[i][j] = blend(image1[i][j], image2[i][j], alpha);
+		int height = image1.length;
+		int width = image1[0].length;
+		Color[][] imageBlend = new Color[height][width];
+
+		
+		for (int i=0; i<height;i++){
+			for (int j=0; j<width; j++){
 				
+				imageBlend[i][j] = blend(image1[i][j], image2[i][j], alpha);
 			}
-		}
-		return newImage;
+		} 
+		return imageBlend;
 	}
 
 	/**
